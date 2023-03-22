@@ -17,5 +17,13 @@ export const navigation = [
         path: '/tasks'
       }
     ]
+  },
+  {
+    text: 'Navigation',
+    icon: 'folder',
+    items: [{
+        text: 'Accordion',
+        path: '/accordion'
+    }]
   }
   ];
