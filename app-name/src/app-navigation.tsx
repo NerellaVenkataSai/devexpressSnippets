@@ -25,5 +25,5 @@ export const navigation = [
         text: 'Accordion',
         path: '/accordion'
     }]
-  }
+  },
   ];
