@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import AccordionComp from './AccordionComp'
 import './styles.css'
 import { companies } from './data'
@@ -41,7 +41,13 @@ function CustomTitle(data:any) {
 }
 
 
-const AccordionCompImpl = () => (
+const AccordionCompImpl = () => { 
+
+    const getSelectedItems = useCallback((currentSelectedItems: Record<string,unknown>, addedItem : Record<string,unknown>, removedItem: Record<string,unknown>) => {
+        console.log(currentSelectedItems, addedItem, removedItem)
+    }, [])
+    
+    return (
     <AccordionComp 
       dataSource={companies}
       customItem={CustomItem}
@@ -50,7 +56,8 @@ const AccordionCompImpl = () => (
       multiple={true}
       collapsible={true}
       animationDuration={300}
+      getSelectedItems={getSelectedItems}
     />
-)
+)}
 
 export default AccordionCompImpl;

@@ -9,7 +9,7 @@ export type AccordionCompProps = {
     customItem: IAccordionOptions['itemRender'];
     customTitle: IAccordionOptions['itemTitleRender'];
     onSelectionChanged?: (selectedIndex: number) => void; 
-    selectedItems?: (items: Number[]) => void;
+    getSelectedItems?: (currentItems: Record<string,unknown>, addedItem: Record<string,unknown>, removedItem: Record<string,unknown>) => void;
 } & IAccordionOptions;
 
 
@@ -18,11 +18,13 @@ const AccordionComp: FunctionComponent<AccordionCompProps> = ({
     customTitle,
     dataSource,
     defaultSelectedItem,
+    getSelectedItems,
     ...props 
 }) => {
     const [selectedItems, setSelectedItems] = useState(defaultSelectedItem || []);
 
     const selectionChanged = (e: any)  => {
+        // console.log(e)
         let newItems = [...selectedItems];
         e.removedItems.forEach((item: any) => {
             const index = newItems.indexOf(item);
@@ -33,7 +35,8 @@ const AccordionComp: FunctionComponent<AccordionCompProps> = ({
         if (e.addedItems.length) {
             newItems = [...newItems, ...e.addedItems];
         }
-        setSelectedItems(newItems)
+        getSelectedItems && getSelectedItems(newItems as any, e.addedItems, e.removedItems)
+        setSelectedItems(newItems);
     }
 
     // we can remove selected accordion manually
