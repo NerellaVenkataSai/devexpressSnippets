@@ -21,9 +21,14 @@ export const navigation = [
   {
     text: 'Navigation',
     icon: 'folder',
-    items: [{
-        text: 'Accordion',
-        path: '/accordion'
+    items: [
+    {
+      text: 'Accordion',
+      path: '/accordion'
+    }, 
+    {
+      text: 'Tabs',
+      path: '/tabs'
     }]
   },
-  ];
+];
