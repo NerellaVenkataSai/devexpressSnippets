@@ -49,6 +49,7 @@ const TabsCompImpl = () => (
         loop={false}
         animationEnabled={true}
         swipeEnabled={true}
+        interactiveTabs={true}
     />
 )
 
