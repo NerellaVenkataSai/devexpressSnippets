@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, ProfilePage, AccrodionComp } from './pages';
+import { HomePage, TasksPage, ProfilePage, AccrodionComp, FormWrapper, TabComp } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -21,7 +21,6 @@ const routes = [
     {
         path: '/form',
         element: FormWrapper
-    }
     },
     {
         path: '/tabs',
