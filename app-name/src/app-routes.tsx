@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, ProfilePage, AccrodionComp } from './pages';
+import { HomePage, TasksPage, ProfilePage, AccrodionComp, FormWrapper } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -17,6 +17,10 @@ const routes = [
     {
         path: '/accordion',
         element: AccrodionComp
+    },
+    {
+        path: '/form',
+        element: FormWrapper
     }
 ];
 

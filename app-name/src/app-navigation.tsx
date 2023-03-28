@@ -25,5 +25,13 @@ export const navigation = [
         text: 'Accordion',
         path: '/accordion'
     }]
-  }
+  },
+  {
+      text: 'Forms',
+      icon: 'folder',
+      items: [{
+          text: 'FormWrapper',
+          path: '/form'
+      }]
+    }
   ];
