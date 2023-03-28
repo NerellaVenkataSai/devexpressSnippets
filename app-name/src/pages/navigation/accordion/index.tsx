@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-import Accordion from 'devextreme-react/accordion';
-import CheckBox from 'devextreme-react/check-box';
-import TagBox from 'devextreme-react/tag-box';
-import Slider, { Tooltip, Label } from 'devextreme-react/slider';
+import React, {useCallback} from 'react';
+import AccordionComp from './AccordionComp'
 import './styles.css'
-
 import { companies } from './data'
+
 
 function CustomItem(data:any) {
     return (
@@ -43,94 +40,24 @@ function CustomTitle(data:any) {
     );
 }
 
-const AccordionComp = () => {
-    const [selectedItems, setSelectedItems] = useState([companies[0]]);
-    const [multiple, setMultiple] = useState(false);
-    const [collapsible, setCollapsible] = useState(false);
-    const [animationDuration, setAnimationDuration] = useState(300);
 
-    const selectionChanged = (e: any)  => {
-        let newItems = [...selectedItems];
-        e.removedItems.forEach((item: any) => {
-            const index = newItems.indexOf(item);
-            if (index >= 0) {
-                newItems.splice(index, 1);
-            }
-        });
-        if (e.addedItems.length) {
-            newItems = [...newItems, ...e.addedItems];
-        }
-        setSelectedItems(newItems)
-    }
+const AccordionCompImpl = () => { 
 
-    const selectedItemsChanged = (e: any) => {
-        setSelectedItems(e.value)
-    }
-
-    const multipleChanged = (e: any) => {
-        setMultiple(e.value);
-    }
-
-    const collapsibleChanged = (e: any) => {
-        setCollapsible(e.value)
-    }
-
-    const animationDurationChanged = (e: any) => {
-        setAnimationDuration(e.value)
-    }
-
+    const getSelectedItems = useCallback((currentSelectedItems: Record<string,unknown>, addedItem : Record<string,unknown>, removedItem: Record<string,unknown>) => {
+        console.log(currentSelectedItems, addedItem, removedItem)
+    }, [])
+    
     return (
-        <div id="accordion">
-            <Accordion
-                dataSource={companies}
-                collapsible={collapsible}
-                multiple={multiple}
-                animationDuration={animationDuration}
-                selectedItems={selectedItems}
-                onSelectionChanged={selectionChanged}
-                itemTitleRender={CustomTitle}
-                itemRender={CustomItem}
-                id="accordion-container"
-            />
-            <div className="options">
-                <div className="caption">Options</div>
-                <div className="option">
-                    <CheckBox text="Multiple enabled"
-                        value={multiple}
-                        onValueChanged={multipleChanged}
-                    />
-                </div>
-                <div className="option">
-                    <CheckBox
-                        text="Collapsible enabled"
-                        value={collapsible}
-                        onValueChanged={collapsibleChanged}
-                    />
-                </div>
-                <div className="option">
-                    <span>Animation duration</span>
-                    <Slider
-                        min={0}
-                        max={1000}
-                        value={animationDuration}
-                        onValueChanged={animationDurationChanged}
-                    >
-                        <Tooltip enabled={true} position="bottom" />
-                        <Label visible={true} />
-                    </Slider>
-                </div>
-                <div className="option">
-                    <span className="caption">Selected Items</span>
-                    <TagBox dataSource={companies}
-                        displayExpr="CompanyName"
-                        value={selectedItems}
-                        onValueChanged={selectedItemsChanged}
-                        disabled={!multiple}
-                    />
-                </div>
-            </div>
-        </div>
-    );
-}
+    <AccordionComp 
+      dataSource={companies}
+      customItem={CustomItem}
+      customTitle={CustomTitle}
+      defaultSelectedItem={[companies[0]]}
+      multiple={true}
+      collapsible={true}
+      animationDuration={300}
+      getSelectedItems={getSelectedItems}
+    />
+)}
 
-export default AccordionComp;
+export default AccordionCompImpl;

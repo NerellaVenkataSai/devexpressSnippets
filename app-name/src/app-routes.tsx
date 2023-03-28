@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, ProfilePage, AccrodionComp, FormWrapper } from './pages';
+import { HomePage, TasksPage, ProfilePage, AccrodionComp } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -22,6 +22,11 @@ const routes = [
         path: '/form',
         element: FormWrapper
     }
+    },
+    {
+        path: '/tabs',
+        element: TabComp
+    },
 ];
 
 export default routes.map(route => {
